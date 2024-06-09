@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="header">
+      <input type="text" placeholder="Search vehicles..." [(ngModel)]="searchText" (input)="filterVehicles()" />
+      <button *ngIf="selectedVehicles.length > 0" (click)="deleteSelected()" class="delete-button">Delete Selected</button>
+      <button class="new-vehicle-button" (click)="openAddVehiclePopup()">+ New Vehicle</button>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+            <th><input type="checkbox" [(ngModel)]="selectAllCheckbox" (change)="selectAll($event)" /></th>            <th>n° registration</th>
+            <th>Model-Brand</th>
+            <th>Fuel type</th>
+            <th>Capacity</th>
+            <th>Volume</th>
+            <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of filteredVehicles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+          [ngClass]="{'highlight': vehicle.registration === newVehicleId}">
+            <td><input type="checkbox" [value]="vehicle.registration" [checked]="selectedVehicleIds.includes(vehicle.registration)" (change)="toggleSelection(vehicle)" /></td>
+            <td>{{ vehicle.registration }}</td>
+            <td>{{ vehicle.modelBrand }}</td>
+            <td>{{ vehicle.fuelType }}</td>
+            <td>{{ vehicle.capacity }} tons</td>
+            <td>{{ vehicle.volume }} m³</td>
+            <td><button (click)="openVehicleDetails(vehicle)"><i class="fa fa-info-circle"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">&lt;</button>
+      <span *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === pages.length">&gt;</button>
+    </div>
+  
+    <app-vehicle-details *ngIf="selectedVehicle" [vehicle]="selectedVehicle" (close)="closeVehicleDetails()"></app-vehicle-details>
+    <app-add-vehicle *ngIf="showAddVehiclePopup" (close)="closeAddVehiclePopup()" (addVehicle)="addNewVehicle($event)"></app-add-vehicle>  </div>
+  

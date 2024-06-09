@@ -1,0 +1,150 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    width: 800px;
+    font-weight: bolder;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.popup-title {
+    text-align: center;
+    color: #FF6B00;
+    font-size: 24px;
+}
+
+.popup-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.form-group {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start; /* Ensure items are aligned at the start */
+}
+
+.form-group label {
+    flex: 1;
+    margin-right: 20px;
+    position: relative;
+    display: block;
+}
+
+.form-group label:last-child {
+    margin-right: 0;
+}
+
+.floating-label input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.floating-label {
+    position: relative;
+    padding-top: 13px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    color: #999;
+}
+
+.floating-label label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.submit-button {
+    background-color: #FF6B00;
+    color: #fff;
+    font-weight: bolder;
+    border-radius: 20px;
+    height: 40px;
+    width: 150px;
+    font-size: medium;
+}
+
+.error {
+    color: red;
+    font-weight: lighter;
+    font-size: small;
+}
+
+.file-upload-label {
+    display: block;
+    position: relative;
+    width: 100%;
+    padding-top: 13px;
+}
+
+.file-upload-input {
+    display: flex;
+    align-items: center;
+    font-weight: lighter;
+    font-size: 12px;
+    color: #999;
+}
+
+.file-upload-label input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    flex-shrink: 0;
+    font-weight: lighter;
+}
+
+.file-name {
+    display: inline-block;
+    vertical-align: middle;
+    flex-grow: 1;
+}
+
+.file-upload-label:hover .upload-button {
+    border: 1px solid #FF6B00;
+}

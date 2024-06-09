@@ -1,0 +1,28 @@
+<!-- <div class="sidebar">
+  <ul>
+    <li routerLinkActive="active">
+      <a routerLink="/vehicles">
+        <i class="fa fa-truck"></i> Vehicles
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/drivers">
+        <i class="fa fa-id-card"></i> Drivers
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/depot">
+        <i class="fa fa-home"></i> Depot
+      </a>
+    </li>
+  </ul>
+</div> -->
+<div class="sidebar">
+  <ul>
+    <li *ngFor="let item of sidebarItems" routerLinkActive="active">
+      <a [routerLink]="item.link">
+        <i class="fa" [ngClass]="item.icon"></i> {{ item.label }}
+      </a>
+    </li>
+  </ul>
+</div>

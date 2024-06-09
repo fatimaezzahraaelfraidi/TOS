@@ -1,0 +1,17 @@
+<div class="login-container">
+    <div class="login-logo">
+      <img src="assets/img/logo.png" alt="Logo">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <i class="fa fa-user icon"></i>
+        <input type="text" formControlName="username" placeholder="USERNAME">
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock icon"></i>
+        <input type="password" formControlName="password" placeholder="PASSWORD">
+      </div>
+      <button type="submit">LOGIN</button>
+      <a href="#" class="forgot-password">Forgot password?</a>
+    </form>
+</div>

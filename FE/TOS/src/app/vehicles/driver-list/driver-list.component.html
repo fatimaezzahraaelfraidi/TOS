@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="header">
+      <input type="text" placeholder="Search drivers..." [(ngModel)]="searchText" (input)="filterDrivers()" />
+      <button *ngIf="selectedDrivers.length > 0" (click)="deleteSelected()" class="delete-button">Delete Selected</button>
+      <button class="new-driver-button" (click)="openAddDriverPopup()">+ New Driver</button>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+            <th><input type="checkbox" [(ngModel)]="selectAllCheckbox" (change)="selectAll($event)" /></th>            
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Phone number</th>
+            <th>Email</th>
+            <th>Driver license number</th>
+            <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let driver of filteredDrivers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+          [ngClass]="{'highlight': driver.driver_id === newDriverId}">
+            <td><input type="checkbox" [value]="driver.driver_id" [checked]="selectedDriverIds.includes(driver.driver_id)" (change)="toggleSelection(driver)" /></td>
+            <td>
+              <img *ngIf="driver.picture !== ''; else defaultPicture" [src]="driver.picture" class="driver-picture" alt="Driver Picture">
+              <ng-template #defaultPicture>
+                <img src="assets/img/noPicture.jpg" class="driver-picture" alt="Driver Picture">
+              </ng-template>
+            </td>
+            <td>{{ driver.first_name }} {{ driver.last_name }}</td>
+            <td>{{ driver.phone_number }}</td>
+            <td>{{ driver.email }}</td>
+            <td>{{ driver.driver_license_number }}</td>
+            <td><button (click)="openDriverDetails(driver)"><i class="fa fa-info-circle"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">&lt;</button>
+      <span *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === pages.length">&gt;</button>
+    </div>
+  
+    <app-driver-details *ngIf="selectedDriver" [driver]="selectedDriver" (close)="closeDriverDetails()"></app-driver-details>
+    <app-add-driver *ngIf="showAddDriverPopup" (close)="closeAddDriverPopup()" (addDriver)="addNewDriver($event)"></app-add-driver>  </div>
+  

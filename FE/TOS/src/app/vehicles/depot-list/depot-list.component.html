@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="header">
+      <input type="text" placeholder="Search depots..." [(ngModel)]="searchText" (input)="filterDepots()" />
+      <button *ngIf="selectedDepots.length > 0" (click)="deleteSelected()" class="delete-button">Delete Selected</button>
+      <button class="new-depot-button" (click)="openAddDepotPopup()">+ New Depot</button>
+    </div>
+  
+    <table>
+      <thead>
+        <tr>
+            <th><input type="checkbox" [(ngModel)]="selectAllCheckbox" (change)="selectAll($event)" /></th>            
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Full Adress</th>
+            <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let depot of filteredDepots.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+          [ngClass]="{'highlight': depot.depot_id === newDepotId}">
+            <td><input type="checkbox" [value]="depot.depot_id" [checked]="selectedDepotIds.includes(depot.depot_id)" (change)="toggleSelection(depot)" /></td>
+            <td>{{ depot.name }}</td>
+            <td>{{ depot.phone_number }}</td>
+            <td>{{ depot.full_address }}
+              <button (click)="showMapPopup(depot)">Show Map</button>
+            </td>
+            <td><button (click)="openDepotDetails(depot)"><i class="fa fa-info-circle"></i></button></td>
+          </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">&lt;</button>
+      <span *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === pages.length">&gt;</button>
+    </div>
+  
+    
+    <!-- <app-depot-details *ngIf="selectedDepot" [depot]="selectedDepot" (close)="closeDepotDetails()"></app-depot-details>
+    <app-add-depot *ngIf="showAddDepotPopup" (close)="closeAddDepotPopup()" (addDepot)="addNewDepot($event)"></app-add-depot>  </div> -->
+     

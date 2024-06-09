@@ -1,0 +1,40 @@
+<div class="popup">
+  <div class="popup-content">
+    <span class="close-button" (click)="close.emit()">×</span>
+    <h2 class="popup-title">Add New Vehicle</h2>
+    <form #vehicleForm="ngForm" (ngSubmit)="addNewVehicle()" class="popup-form" novalidate> <!-- Add the class for the form -->
+      <div class="form-group">
+        <label class="floating-label"> 
+          n° registration:
+          <input type="text" [(ngModel)]="vehicle.registration" name="registration" required #registration="ngModel" placeholder="n° registration" />
+          <div *ngIf="registration.invalid && registration.touched" class="error">This field is required</div>
+        </label>
+        <label class="floating-label"> 
+          Model-Brand:
+          <input type="text" [(ngModel)]="vehicle.modelBrand" name="modelBrand" required #modelBrand="ngModel" placeholder="Model-Brand" />
+          <div *ngIf="modelBrand.invalid && modelBrand.touched" class="error">This field is required</div>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="floating-label"> 
+          Fuel type:
+          <input type="text" [(ngModel)]="vehicle.fuelType" name="fuelType" required #fuelType="ngModel" placeholder="Fuel type" />
+          <div *ngIf="fuelType.invalid && fuelType.touched" class="error">This field is required</div>
+        </label>
+        <label class="floating-label"> 
+          Capacity:
+          <input type="number" [(ngModel)]="vehicle.capacity" name="capacity" required #capacity="ngModel" placeholder="Capacity" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+          <div *ngIf="capacity.invalid && capacity.touched" class="error">This field is required</div>
+        </label>
+      </div>
+      <div class="form-group">
+        <label class="floating-label"> 
+          Volume:
+          <input type="number" [(ngModel)]="vehicle.volume" name="volume" required #volume="ngModel" placeholder="Volume" oninput="this.value = this.value.replace(/[^0-9]/g, '');"/>
+          <div *ngIf="volume.invalid && volume.touched" class="error">This field is required</div>
+        </label>
+      </div>
+      <button class="submit-button" type="submit" [disabled]="vehicleForm.invalid">Add Vehicle</button> <!-- Add the class for the button -->
+    </form>
+  </div>
+</div>

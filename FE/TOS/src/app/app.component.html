@@ -1,0 +1,11 @@
+<div class="d1" *ngIf="shouldShowNavAndSidebar()">
+    <app-navbar></app-navbar>
+    <div class="d2">
+        <app-sidebar></app-sidebar>
+        <router-outlet />
+    </div>
+</div>
+
+<div *ngIf="!shouldShowNavAndSidebar()" class="d3">
+    <router-outlet />
+</div>

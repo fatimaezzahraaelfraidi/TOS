@@ -1,0 +1,35 @@
+<div class="popup">
+  <div class="popup-content">
+      <span class="close-button" (click)="close.emit()">×</span>
+      <h2 class="popup-title">Vehicle Details</h2>
+      <form (ngSubmit)="updateVehicle()" class="popup-form">
+          <div class="form-group">
+              <label class="floating-label">
+                  n° registration:
+                  <input type="text" [(ngModel)]="vehicle.registration" name="registration" placeholder="n° registration" />
+              </label>
+              <label class="floating-label">
+                  Model-Brand:
+                  <input type="text" [(ngModel)]="vehicle.modelBrand" name="modelBrand" placeholder="Model-Brand" />
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="floating-label">
+                  Fuel type:
+                  <input type="text" [(ngModel)]="vehicle.fuelType" name="fuelType" placeholder="Fuel type" />
+              </label>
+              <label class="floating-label">
+                  Capacity:
+                  <input type="number" [(ngModel)]="vehicle.capacity" name="capacity" placeholder="Capacity"  oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+              </label>
+          </div>
+          <div class="form-group">
+              <label class="floating-label">
+                  Volume:
+                  <input type="number" [(ngModel)]="vehicle.volume" name="volume" placeholder="Volume"  oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+              </label>
+          </div>
+          <button class="submit-button" type="submit">Update</button>
+      </form>
+  </div>
+</div>

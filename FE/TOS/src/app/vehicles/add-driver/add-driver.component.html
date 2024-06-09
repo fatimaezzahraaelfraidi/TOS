@@ -1,0 +1,49 @@
+<div class="popup">
+    <div class="popup-content">
+      <span class="close-button" (click)="close.emit()">×</span>
+      <h2 class="popup-title">Add New Driver</h2>
+      <form #driverForm="ngForm" (ngSubmit)="addNewDriver()" class="popup-form" novalidate> <!-- Add the class for the form -->
+        <div class="form-group">
+          <label class="floating-label"> 
+            First Name:
+            <input type="text" [(ngModel)]="driver.first_name" name="first_name" required #first_name="ngModel" placeholder="First Name" />
+            <div *ngIf="first_name.invalid && first_name.touched" class="error">This field is required</div>
+          </label>
+          <label class="floating-label"> 
+            Last Name:
+            <input type="text" [(ngModel)]="driver.last_name" name="last_name" required #last_name="ngModel" placeholder="Last Name" />
+            <div *ngIf="last_name.invalid && last_name.touched" class="error">This field is required</div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="floating-label"> 
+            Phone Number:
+            <input type="text" [(ngModel)]="driver.phone_number" name="phone_number" required #phone_number="ngModel" placeholder="Phone Number" />
+            <div *ngIf="phone_number.invalid && phone_number.touched" class="error">This field is required</div>
+          </label>
+          <label class="floating-label"> 
+            Email:
+            <input type="text" [(ngModel)]="driver.email" name="email" required #email="ngModel" placeholder="Email" />
+            <div *ngIf="email.invalid && email.touched" class="error">This field is required</div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="floating-label"> 
+            Driver License Number:
+            <input type="text" [(ngModel)]="driver.driver_license_number" name="driver_license_number" required #driver_license_number="ngModel" placeholder="Driver License Number"/>
+            <div *ngIf="driver_license_number.invalid && driver_license_number.touched" class="error">This field is required</div>
+          </label>
+          <label class="file-upload-label">
+            Picture:
+            <div class="file-upload-input">
+                <input type="file"  (change)="onFileSelected($event)" />
+                <span class="upload-button">{{ selectedFileName ? 'Update Picture File' : 'Choose Picture File' }}</span>
+                <span class="file-name">{{ selectedFileName || 'No file chosen' }}</span>
+            </div>
+        </label>
+        </div>
+        <button class="submit-button" type="submit" [disabled]="driverForm.invalid">Add Driver</button> <!-- Add the class for the button -->
+      </form>
+    </div>
+  </div>
+  
