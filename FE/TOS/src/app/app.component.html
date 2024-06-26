@@ -1,4 +1,4 @@
-<div class="d1" *ngIf="shouldShowNavAndSidebar()">
+<div class="d1" *ngIf="shouldShowNavbar() && shouldShowSidebar()">
     <app-navbar></app-navbar>
     <div class="d2">
         <app-sidebar></app-sidebar>
@@ -6,6 +6,13 @@
     </div>
 </div>
 
-<div *ngIf="!shouldShowNavAndSidebar()" class="d3">
+<div class="d1" *ngIf="shouldShowNavbar() && !shouldShowSidebar()">
+    <app-navbar></app-navbar>
+    <div class="d3">
+        <router-outlet />
+    </div>
+</div>
+
+<div *ngIf="!shouldShowNavbar() && !shouldShowSidebar()" class="d3">
     <router-outlet />
 </div>

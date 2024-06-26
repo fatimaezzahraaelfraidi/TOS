@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Vehicle } from '../../core/vehicle.model';
 import { VehicleDetailsComponent } from '../vehicle-details/vehicle-details.component';
 import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
+import { MyGlobalServiceService } from '../../my-global-service.service';
 
 @Component({
   selector: 'app-vehicle-list',
@@ -14,36 +15,7 @@ import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
 })
 
 export class VehicleListComponent implements OnInit {
-  vehicles: Vehicle[] = [
-    // Sample data, replace with your actual data
-    { registration: 'MA-14567', modelBrand: 'Toyota Camry', fuelType: 'Diesel', capacity: 1, volume: 1000 },
-    { registration: 'MA-42567', modelBrand: 'Honda Accord', fuelType: 'Gasoline', capacity: 3, volume: 3000 },
-    { registration: 'MA-45367', modelBrand: 'Toyota Camry', fuelType: 'Diesel', capacity: 3, volume: 3000 },
-    { registration: 'MA-45647', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 1, volume: 1000 },
-    { registration: 'MA-54567', modelBrand: 'Toyota Camry', fuelType: 'Gasoline', capacity: 2, volume: 2000 },
-    { registration: 'MA-46567', modelBrand: 'Toyota Camry', fuelType: 'Gasoline', capacity: 1, volume: 1000 },
-    { registration: 'MA-45767', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 2, volume: 2000 },
-    { registration: 'MA-45687', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 3, volume: 3000 },
-    { registration: 'MA-45679', modelBrand: 'Honda Accord', fuelType: 'Gasoline', capacity: 5, volume: 5000 },
-    { registration: 'MA-94567', modelBrand: 'Toyota Camry', fuelType: 'Diesel', capacity: 1, volume: 1000 },
-    { registration: 'MA-48567', modelBrand: 'Honda Accord', fuelType: 'Gasoline', capacity: 3, volume: 3000 },
-    { registration: 'MA-45767', modelBrand: 'Toyota Camry', fuelType: 'Diesel', capacity: 3, volume: 3000 },
-    { registration: 'MA-45667', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 1, volume: 1000 },
-    { registration: 'MA-45675', modelBrand: 'Toyota Camry', fuelType: 'Gasoline', capacity: 2, volume: 2000 },
-    { registration: 'MA-44567', modelBrand: 'Toyota Camry', fuelType: 'Gasoline', capacity: 1, volume: 1000 },
-    { registration: 'MA-45567', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 2, volume: 2000 },
-    { registration: 'MA-45267', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 3, volume: 3000 },
-    { registration: 'MA-45667', modelBrand: 'Honda Accord', fuelType: 'Gasoline', capacity: 5, volume: 5000 },
-    { registration: 'MA-45672', modelBrand: 'Toyota Camry', fuelType: 'Diesel', capacity: 1, volume: 1000 },
-    { registration: 'MA-45671', modelBrand: 'Honda Accord', fuelType: 'Gasoline', capacity: 3, volume: 3000 },
-    { registration: 'MA-45627', modelBrand: 'Toyota Camry', fuelType: 'Diesel', capacity: 3, volume: 3000 },
-    { registration: 'MA-45567', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 1, volume: 1000 },
-    { registration: 'MA-45367', modelBrand: 'Toyota Camry', fuelType: 'Gasoline', capacity: 2, volume: 2000 },
-    { registration: 'MA-451167', modelBrand: 'Toyota Camry', fuelType: 'Gasoline', capacity: 1, volume: 1000 },
-    { registration: 'MA-456357', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 2, volume: 2000 },
-    { registration: 'MA-4562237', modelBrand: 'Honda Accord', fuelType: 'Diesel', capacity: 3, volume: 3000 },
-    { registration: 'MA-456723', modelBrand: 'Honda Accord', fuelType: 'Gasoline', capacity: 5, volume: 5000 }
-];
+  vehicles: Vehicle[]  ;
 
 
   filteredVehicles: Vehicle[] = [];
@@ -58,6 +30,10 @@ export class VehicleListComponent implements OnInit {
   newVehicleId: string | null = null; // To store the ID of the newly added vehicle
   
   showAddVehiclePopup: boolean = false;
+
+  constructor(private globalService: MyGlobalServiceService) {
+    this.vehicles = globalService.vehicles;
+  }
 
   ngOnInit() {
     this.filteredVehicles = [...this.vehicles];

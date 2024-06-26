@@ -4,5 +4,8 @@ export interface Vehicle {
     fuelType: string;
     capacity: number;
     volume: number;
-  }
+    current_longitude: string;
+    current_latitude: string;
+    driver_id: string;
+}
   

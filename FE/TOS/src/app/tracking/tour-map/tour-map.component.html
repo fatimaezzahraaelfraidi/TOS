@@ -1,1 +1,58 @@
-<p>tour-map works!</p>
+<div class="main-container">
+    <div class="details-container">
+        <div class="delivery-orders-details">
+            <h3 class="title">Delivery Orders</h3>
+            <div class="scrollable-container">
+                <div *ngFor="let order of filtered_delivery_orders" 
+                  class="order-card">
+                  <h4>{{ order.owner }}</h4>
+                  <div class="inOneRow">
+                    <p>Adresse: {{ order.delivery_address }}</p>
+                    <div class="inOneColumn">
+                        <p>{{ order.planned_delivery_date }}</p>
+                        <p> {{ order.planned_delivery_time }} </p>
+                    </div>
+                  </div>
+                  <button class="modify-icon" (click)="modifyOrder(order)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                </div>
+            </div>
+        </div>
+        <div class="delivery-man-details">
+            <h3 class="title">Deliveries</h3>
+            <div class="scrollable-container">
+                <div  *ngFor="let driver of getDriverKeys()" class="driver-card">
+                  <div class="driver-info">
+                    <i class="fa fa-truck fa-2x iconTruck" [ngStyle]="{ 'color': getMarkerColor(driver) }"></i>
+                    <span [ngStyle]="{ 'color': getMarkerColor(driver) }" >{{ getDriverInfo(driver)?.first_name }} {{ getDriverInfo(driver)?.last_name }}</span>
+                    <span class="activity-level" [ngStyle]="{ 'background-color': getMarkerColor(driver) }"> {{getTourStatus(driver)}}</span>
+                    <div class="progress-bar-container" [ngStyle]="{ 'border': '1px solid ' + getMarkerColor(driver), 'position': 'relative' }">
+                        <div class="progress-bar-fill" [ngStyle]="{ width: getTourProgress(driver) + '%' , 'background-color': getMarkerColor(driver) }">
+                        </div>
+                        <span class="progress-bar-text" style="color: black; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">{{getTourProgress(driver)}}%</span>
+                    </div>
+                                             
+                  </div>
+                  <div class="driver-times" [ngStyle]="{ 'color': getMarkerColor(driver) }">
+                    <div class="startTime">
+                        <i class="fa fa-flag"></i>
+                        <span>{{getStartTime(driver)}}</span>
+                    </div>
+                    <div [ngStyle]="{ 'color': getMarkerColor(driver) }">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                        <span>{{getEndTime(driver)}}</span>
+                    </div>
+                    <div class="km" [ngStyle]="{ 'color': getMarkerColor(driver) }">
+                        <i class="fa fa-road"></i>
+                        <span>km</span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map-container">
+        <div id="map" style="width: 100%; height: 100%;" ></div>
+    </div>
+</div>

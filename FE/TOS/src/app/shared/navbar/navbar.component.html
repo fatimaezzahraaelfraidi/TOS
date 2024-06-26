@@ -2,7 +2,8 @@
     <div class="navbar-logo">
       <img src="assets/img/tosL.png" alt="T.O.S logo"> 
     </div>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav" *ngIf="role !== 'analyst'">
+      <li *ngIf="role === 'admin'"><a  routerLink="/users-list" (click)="onNavItemClicked('vehicles')"><i class="fa fa-users"></i>Users</a></li>
       <li><a  routerLink="/vehicles" (click)="onNavItemClicked('vehicles')"><i class="fa fa-truck"></i>Vehicles</a></li>
       <li><a routerLink="/planning" (click)="onNavItemClicked('planning')"><i class="fa fa-calendar-days"></i>Planning</a></li>
       <li><a routerLink="/tracking" (click)="onNavItemClicked('tracking')"><i class="fa fa-map-location-dot"></i>Tracking</a></li>
@@ -10,7 +11,11 @@
     <div class="navbar-settings">
       <a href="#" style="margin-right: 20px;"><i class="fa fa-cog"></i> Settings</a>
       <a href="#" style="margin-right: 20px;"><i class="fa fa-bell"></i></a>
-      <a href="#"><i class="fa fa-user"></i></a>
+      <a (click)="toggleUserMenu()"><i class="fa fa-user"></i></a>
+      <div *ngIf="showUserMenu" class="user-menu">
+        <p>{{ username }}</p>
+        <button (click)="logout()">Logout</button>
+      </div>
     </div>
   </nav>
   

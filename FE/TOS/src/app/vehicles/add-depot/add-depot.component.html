@@ -1,1 +1,35 @@
-<p>add-depot works!</p>
+<div class="popup">
+    <div class="popup-content">
+      <span class="close-button" (click)="close.emit()">×</span>
+      <h2 class="popup-title">Add New Depot</h2>
+      <form #depotForm="ngForm" (ngSubmit)="addNewDepot()" class="popup-form" novalidate> <!-- Add the class for the form -->
+        <div class="form-group">
+          <label class="floating-label"> 
+            Name:
+            <input type="text" [(ngModel)]="depot.name" name="name" required #name="ngModel" placeholder="Name" />
+            <div *ngIf="name.invalid && name.touched" class="error">This field is required</div>
+          </label>
+          <label class="floating-label"> 
+            Phone Number:
+            <input type="text" [(ngModel)]="depot.phone_number" name="phone_number" required #phone_number="ngModel" placeholder="Phone Number" />
+            <div *ngIf="phone_number.invalid && phone_number.touched" class="error">This field is required</div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="floating-label"> 
+            Full Address:
+            <input type="text" [(ngModel)]="depot.full_address" name="full_address" required #full_address="ngModel" placeholder="Full Adress" />
+            <div *ngIf="full_address.invalid && full_address.touched" class="error">This field is required</div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="floating-label"> 
+            Choose the depot location in map :
+            <div id="map" style="width: 100%; height: 300px;" ></div>
+          </label>
+        </div>
+        <button class="submit-button" type="submit" [disabled]="depotForm.invalid">Add Depot</button> <!-- Add the class for the button -->
+      </form>
+    </div>
+  </div>
+  

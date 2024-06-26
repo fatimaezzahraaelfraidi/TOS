@@ -17,8 +17,13 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   // Method to check if the current route is either 'login' or 'register'
-  shouldShowNavAndSidebar(): boolean {
+  shouldShowNavbar(): boolean {
     const currentRoute = this.router.url;
     return !(currentRoute === '/login' || currentRoute === '/register' || currentRoute === '/' );
+  }
+  // Method to check if the current route is either 'login' or 'register'
+  shouldShowSidebar(): boolean {
+    const currentRoute = this.router.url;
+    return !(currentRoute === '/login' || currentRoute === '/register' || currentRoute === '/users-list' || currentRoute === '/' );
   }
 }

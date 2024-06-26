@@ -171,29 +171,14 @@ closeAddDepotPopup() {
   this.showAddDepotPopup = false;
 }
 
-// showMapPopup(depot: Depot) {
-//   const dialogRef = this.dialog.open(ShowCoordinatesComponent, {
-//     width: '600px',
-//     data: {
-//       latitude: depot.latitude,
-//       longitude: depot.longitude
-//     }
-
-    
-//   });
-//   console.log('this is data '+depot.latitude+" "+depot.longitude);
-//   dialogRef.afterClosed().subscribe(result => {
-//     console.log('The dialog was closed');
-//   });
-// }
-
 showMapPopup(depot: Depot) {
   this.loadGoogleMapsScript(() => {
     const dialogRef = this.dialog.open(ShowCoordinatesComponent, {
       width: '600px',
       data: {
         latitude: depot.latitude,
-        longitude: depot.longitude
+        longitude: depot.longitude,
+        title: depot.name+" Location"
       }
     });
 

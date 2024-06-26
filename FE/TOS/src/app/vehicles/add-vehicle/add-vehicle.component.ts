@@ -19,7 +19,10 @@ export class AddVehicleComponent {
     modelBrand: '',
     fuelType: '',
     capacity: 0 ,
-    volume: 0
+    volume: 0,
+    current_latitude: '',
+    current_longitude: '',
+    driver_id: ''
   };
 
   addNewVehicle() { 

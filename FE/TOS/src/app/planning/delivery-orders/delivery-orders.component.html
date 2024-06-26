@@ -1,1 +1,72 @@
-<p>delivery-orders works!</p>
+<div class="container">
+    <div class="header">
+        <ng-container *ngIf="!isMapView">
+            <div class="bigToogle">
+                <div class="smallToogle" (click)="switchView()">
+                    <i class="fa fa-map-location-dot"></i> Map
+                </div>
+                <div class="smallToogleSelected">
+                    <i class="fa fa-list"></i> List
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="isMapView">
+            <div class="bigToogle">
+                <div class="smallToogleSelected">
+                    <i class="fa fa-map-location-dot"></i> Map
+                </div>
+                <div class="smallToogle"  (click)="switchView()">
+                    <i class="fa fa-list"></i> List
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!isMapView">
+        <input type="text" placeholder="Search delivery_orders..." [(ngModel)]="searchText" (input)="filterDeliveryOrders()" />
+        <button *ngIf="selectedDeliveryOrders.length > 0" (click)="deleteSelected()" class="delete-button">Delete Selected</button>
+        </ng-container>
+        <button class="new-delivery_order-button" (click)="openAddDeliveryOrderPopup()">+ New Delivery Order</button>
+    </div>
+    <ng-container *ngIf="isMapView; else listView">
+        <!-- Your map view -->
+        <div id="map" style="width: 100%; height: 85%;" ></div>
+    </ng-container>
+    
+    <ng-template #listView>
+    <table>
+      <thead>
+        <tr>
+            <th><input type="checkbox" [(ngModel)]="selectAllCheckbox" (change)="selectAll($event)" /></th>            
+            <th>DO Id</th>        
+            <th>Created At</th>
+            <th>Status</th>
+            <th>Owner</th>
+            <th>Delivery Address</th>
+            <th>Delivery Man</th>
+            <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let delivery_order of filteredDeliveryOrders.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+          [ngClass]="{'highlight': delivery_order.delivery_order_id === newDeliveryOrderId}">
+            <td><input type="checkbox" [value]="delivery_order.delivery_order_id" [checked]="selectedDeliveryOrderIds.includes(delivery_order.delivery_order_id)" (change)="toggleSelection(delivery_order)" /></td>
+            <td>{{ delivery_order.delivery_order_id }}</td>
+            <td>{{ delivery_order.created_at }}</td>
+            <td [style.background-color]="getStatusColor(delivery_order.status)" class="status-box">{{ delivery_order.status }}</td>
+            <td>{{ delivery_order.owner }}</td>
+            <td>{{ delivery_order.delivery_address }}</td>
+            <td>{{ delivery_order.delivery_man }}</td>
+            <td><button (click)="openDeliveryOrderDetails(delivery_order)"><i class="fa fa-info-circle"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">&lt;</button>
+      <span *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === pages.length">&gt;</button>
+    </div>
+</ng-template>
+<app-delivery-order-details *ngIf="selectedDeliveryOrder" [delivery_order]="selectedDeliveryOrder" (close)="closeDeliveryOrderDetails()"></app-delivery-order-details>
+    <!-- <app-add-delivery_order *ngIf="showAddDeliveryOrderPopup" (close)="closeAddDeliveryOrderPopup()" (addDeliveryOrder)="addNewDeliveryOrder($event)"></app-add-delivery_order>   -->
+</div>
+  

@@ -1,0 +1,58 @@
+<div class="popup">
+    <div class="popup-content">
+        <span class="close-button" (click)="close.emit()">×</span>
+        <h2 class="popup-title">Delivery Order Details</h2>
+        <form (ngSubmit)="updateDeliveryOrder()" class="popup-form">
+            <div class="form-group">
+                <label class="floating-label">
+                    Delivery Order Id:
+                    <input type="text" [(ngModel)]="delivery_order.delivery_order_id" name="delivery_order_id" placeholder="Delivery Order Id" readonly />
+                </label>
+                <label class="floating-label">
+                    Created At:
+                    <input type="text" [(ngModel)]="delivery_order.created_at" name="created_at" placeholder="Created At" readonly />
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="floating-label">
+                    Owner:
+                    <input type="text" [(ngModel)]="delivery_order.owner" name="owner" placeholder="Owner" readonly />
+                </label>
+                <label class="floating-label">
+                    Delivery Address:
+                    <input type="text" [(ngModel)]="delivery_order.delivery_address" name="delivery_address" placeholder="Delivery Address" readonly />
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="floating-label">
+                    Delivery Man:
+                    <input type="text" [(ngModel)]="delivery_order.delivery_man" name="delivery_man" placeholder="Delivey Man" readonly />
+                </label>
+                <label class="floating-label">
+                    Status:
+                    <input type="text" [(ngModel)]="delivery_order.status" name="status" placeholder="Status" readonly />
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="floating-label">
+                    Planned Delivery Date:
+                    <input type="text" [(ngModel)]="delivery_order.planned_delivery_date" name="planned_delivery_date" placeholder="Planned Delivery Date" readonly />
+                </label>
+                <label class="floating-label">
+                    Planned Delivery Time:
+                    <input type="text" [(ngModel)]="delivery_order.planned_delivery_time" name="planned_delivery_time" placeholder="Planned Delivery Time" readonly />
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="floating-label">
+                    Reel Delivery Date:
+                    <input type="text" [(ngModel)]="delivery_order.reel_delivery_date" name="reel_delivery_date" placeholder="Reel Delivery Date" readonly />
+                </label>
+                <label class="floating-label">
+                    Reel Delivery Time:
+                    <input type="text" [(ngModel)]="delivery_order.reel_delivery_time" name="reel_delivery_time" placeholder="Reel Delivery Time" readonly />
+                </label>
+            </div>
+        </form>
+    </div>
+</div>

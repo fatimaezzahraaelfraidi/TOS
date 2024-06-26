@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="header">
+      <input type="text" placeholder="Search users..." [(ngModel)]="searchText" (input)="filterUsers()" />
+      <select [(ngModel)]="selectedRole" (change)="filterUsers()" class="filter" [ngClass]="{'role-selected': selectedRole !== ''}">
+        <option value="">All Roles</option>
+        <option value="Admin">Admin</option>
+        <option value="Fleet Manager">Fleet Manager</option>
+        <option value="Analyst">Analyst</option>
+        <option value="Driver">Driver</option>
+      </select>
+      <button *ngIf="selectedUsers.length > 0" (click)="deleteSelected()" class="delete-button">Delete Selected</button>
+      <button class="new-user-button" (click)="openAddUserPopup()">+ New User Account</button>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+            <th><input type="checkbox" [(ngModel)]="selectAllCheckbox" (change)="selectAll($event)" /></th>  
+            <th>picture</th>          
+            <th>Full Name</th>
+            <th>Email Adress</th>
+            <th>Phone number</th>
+            <th>Joined At</th>
+            <th>Roles</th>
+            <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)"
+          [ngClass]="{'highlight': user.user_id === newUserId}">
+            <td><input type="checkbox" [value]="user.user_id" [checked]="selectedUserIds.includes(user.user_id)" (change)="toggleSelection(user)" /></td>
+            <td>
+              <img *ngIf="user.picture !== ''; else defaultPicture" [src]="user.picture" class="user-picture" alt="User Picture">
+              <ng-template #defaultPicture>
+                <img src="assets/img/noPicture.jpg" class="user-picture" alt="User Picture">
+              </ng-template>
+            </td>
+            <td>{{ user.first_name }} {{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ getEarliestAccountDateForUser(user) | date:'longDate' }}</td>
+            <td class="role">
+                <div class="role-box" *ngFor="let role of getAccountRolesForUser(user)"  [style.background-color]="getRoleColor(role)">{{ role }}</div>
+            </td>
+            <td><button (click)="openUserDetails(user)"><i class="fa fa-info-circle"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="currentPage === 1">&lt;</button>
+      <span *ngFor="let page of pages" (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage === pages.length">&gt;</button>
+    </div>
+  
+    <app-user-details *ngIf="selectedUser" [user]="selectedUser" [accounts]="selectUserAccounts" (close)="closeUserDetails()"></app-user-details>
+    <app-add-user-account *ngIf="showAddUserPopup" [users]="users" [accounts]="accounts" (close)="closeAddUserPopup()" (userAdded)="addNewUser($event)"></app-add-user-account>  

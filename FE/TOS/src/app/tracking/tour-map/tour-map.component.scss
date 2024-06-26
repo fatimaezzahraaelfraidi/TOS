@@ -1,0 +1,158 @@
+.main-container {
+    display: flex;
+    height: 90vh; /* Ensure the container takes the full viewport height */
+    width: 89vw;  /* Ensure the container takes the full viewport width */
+    background-color: cadetblue;
+}
+
+/* Style for the map container to take up half of the width */
+.map-container {
+    flex: 2; /* Takes 50% of the container width */
+    background-color: #f0f0f0; /* Example background color */
+}
+
+/* Style for the details container to take up the other half of the width */
+.details-container {
+    flex: 1; /* Takes 50% of the container width */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Each section inside the details container should take up equal height */
+.delivery-orders-details,
+.delivery-man-details {
+    flex: 1; /* Takes 50% of the container height */
+    border: 1px solid #ccc; /* Example border to visualize sections */
+    background-color: #ffffff; /* Example background color */
+}
+
+.delivery-orders-details {
+    overflow: hidden;
+    background-color: #D9D9D9;
+}
+
+.title {
+    height: 5px;
+    padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    margin-left: 13px;
+    text-decoration-line: underline;
+}
+.scrollable-container {
+    height: 90%;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  
+  .order-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .modify-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  .order-card h4 {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+.inOneRow {
+    display: flex;
+    flex-direction: row; 
+     align-content: center;
+    align-items: center;
+  justify-content: space-between;
+}
+.inOneColumn {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+  h3 {
+    margin: 0 0 5px 0;
+  }
+  
+  p {
+    margin: 0;
+  }
+
+  .driver-info, .driver-times {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .driver-info i, .driver-times i {
+    margin-right: 5px;
+  }
+  .driver-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .activity-level {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 5px;
+  }
+  
+
+  .progress-bar-container {
+    width: 100px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 10px;
+    height: 20px;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    //background-color: #000;
+    text-align: center;
+    white-space: nowrap;
+    transition: width 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .progress-bar-text {
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .driver-info {
+    margin-bottom: 10px;
+    background-color:#e0e0e0 ;
+    padding: 5px;
+  }
+
+  .startTime {
+    margin-left: 100px;
+  }
+  .km {
+    margin-right: 100px;
+  }
+  .iconTruck {
+    margin-left: 10px;
+  }
+
+  .driver-times {
+    font-weight: bold;
+  }

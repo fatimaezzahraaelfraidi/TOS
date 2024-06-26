@@ -1,0 +1,81 @@
+<div class="popup">
+    <div class="popup-content">
+        <span class="close-button" (click)="closePopup()">×</span>
+        <h2 class="popup-title">{{ currentPage === 1 ? 'Create a New User' : userChoice === 'new' ? 'Create a New User' : 'Create a New Account for an Existing User' }}</h2>
+        <form (ngSubmit)="onSubmit()">
+            <div *ngIf="currentPage === 1" class="choice-buttons-container">
+                <button type="button" class="choice-button" (click)="navigateToPage('new')">Create a new user</button>
+                <button type="button" class="choice-button" (click)="navigateToPage('existing')">Create a new account for an existing user</button>
+            </div>              
+            <div *ngIf="currentPage === 2 && userChoice === 'new'">
+                <label>
+                    First Name:
+                    <input type="text" [(ngModel)]="newUser.first_name" name="first_name" required />
+                </label>
+                <label>
+                    Last Name:
+                    <input type="text" [(ngModel)]="newUser.last_name" name="last_name" required />
+                </label>
+                <label>
+                    CIN Number:
+                    <input type="text" [(ngModel)]="newUser.cin" name="cin" required />
+                </label>
+            </div>
+            <div *ngIf="currentPage === 3 && userChoice === 'new'">
+                <label>
+                    Email:
+                    <input type="email" [(ngModel)]="newUser.email" name="email" required />
+                </label>
+                <label>
+                    Phone Number:
+                    <input type="text" [(ngModel)]="newUser.phone_number" name="phone_number" required />
+                </label>
+                <label>
+                    Role:
+                    <select [(ngModel)]="newAccount.role" name="role" (change)="onRoleChange($event)" required>
+                        <option value="" disabled>Select role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Fleet Manager">Fleet Manager</option>
+                        <option value="Analyst">Analyst</option>
+                        <option value="Driver">Driver</option>
+                    </select>
+                </label>
+                <label *ngIf="newAccount.role === 'Driver'">
+                    Driving License Number:
+                    <input type="text" [(ngModel)]="drivingLicense" name="driving_license" required />
+                </label>
+            </div>
+            <div *ngIf="currentPage === 2 && userChoice === 'existing'">
+                <label>
+                    Select User:
+                    <input type="text" [(ngModel)]="searchText" (input)="filterUsers()" placeholder="Start typing user name..." [ngModelOptions]="{standalone: true}" />
+                    <select [(ngModel)]="selectedUser" name="selected_user" (change)="onUserSelect()" required>
+                      <option [ngValue]="null">-- Select a user --</option>
+                      <option *ngFor="let user of filteredUsers" [ngValue]="user">{{ user.first_name }} {{ user.last_name }}</option>
+                    </select>
+                  </label>
+            </div>
+            <div *ngIf="currentPage === 3 && userChoice === 'existing'">
+                <label>
+                    Role:
+                    <select [(ngModel)]="newAccount.role" name="role" (change)="onRoleChange($event)" required>
+                        <option value="" disabled>Select role</option>
+                        <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+                    </select>
+                </label>
+                <label *ngIf="newAccount.role === 'Driver'">
+                    Driving License Number:
+                    <input type="text" [(ngModel)]="drivingLicense" name="driving_license" required />
+                </label>
+                <div *ngIf="availableRoles.length === 0" class="error-message">
+                    All roles are already assigned to this user.
+                </div>
+            </div>
+            <div *ngIf="currentPage !== 1" class="navigation-buttons">
+                <button type="button" (click)="previousPage()" *ngIf="currentPage > 1">Previous</button>
+                <button type="button" (click)="nextPage()" *ngIf="currentPage < 3 && (!isExistingUserRoleLimitExceeded || userChoice !== 'existing')">Next</button>
+                <button type="submit" *ngIf="currentPage === 3 && (!isExistingUserRoleLimitExceeded || userChoice !== 'existing')">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

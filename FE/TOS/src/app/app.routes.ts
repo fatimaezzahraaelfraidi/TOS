@@ -13,4 +13,5 @@ export const routes: Routes = [
   { path: 'tracking', loadComponent: () => import('./tracking/tour-map/tour-map.component').then(m => m.TourMapComponent) },
   { path: 'tour-map', loadComponent: () => import('./tracking/tour-map/tour-map.component').then(m => m.TourMapComponent) },
   { path: 'delivery-list', loadComponent: () => import('./tracking/delivery-list/delivery-list.component').then(m => m.DeliveryListComponent) },
+  { path: 'users-list', loadComponent: () => import('./users/users-list/users-list.component').then(m => m.UsersListComponent) },
 ];

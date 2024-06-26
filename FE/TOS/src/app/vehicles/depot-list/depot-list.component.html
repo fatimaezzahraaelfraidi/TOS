@@ -12,7 +12,7 @@
             <th>Name</th>
             <th>Phone Number</th>
             <th>Full Adress</th>
-            <th>Details</th>
+            <th>Show in Map</th>
         </tr>
       </thead>
       <tbody>
@@ -21,10 +21,10 @@
             <td><input type="checkbox" [value]="depot.depot_id" [checked]="selectedDepotIds.includes(depot.depot_id)" (change)="toggleSelection(depot)" /></td>
             <td>{{ depot.name }}</td>
             <td>{{ depot.phone_number }}</td>
-            <td>{{ depot.full_address }}
-              <button (click)="showMapPopup(depot)">Show Map</button>
-            </td>
-            <td><button (click)="openDepotDetails(depot)"><i class="fa fa-info-circle"></i></button></td>
+            <td>{{ depot.full_address }}</td>
+            <td><button (click)="showMapPopup(depot)">
+              <i class="fa fa-map-location-dot"></i>
+            </button></td>
           </tr>
       </tbody>
     </table>
@@ -35,7 +35,6 @@
       <button (click)="nextPage()" [disabled]="currentPage === pages.length">&gt;</button>
     </div>
   
-    
-    <!-- <app-depot-details *ngIf="selectedDepot" [depot]="selectedDepot" (close)="closeDepotDetails()"></app-depot-details>
-    <app-add-depot *ngIf="showAddDepotPopup" (close)="closeAddDepotPopup()" (addDepot)="addNewDepot($event)"></app-add-depot>  </div> -->
+    <app-add-depot *ngIf="showAddDepotPopup" (close)="closeAddDepotPopup()" (addDepot)="addNewDepot($event)"></app-add-depot>  
+  </div>
      

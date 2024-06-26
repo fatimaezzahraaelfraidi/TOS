@@ -3,6 +3,7 @@ import { NavigationService } from '../../core/navigation.service';
 import { Router, ActivatedRoute, NavigationEnd, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { MyGlobalServiceService } from '../../my-global-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,11 +14,15 @@ import { filter } from 'rxjs/operators';
 })
 export class NavbarComponent implements OnInit {
   activeLink: string = '';
+  role: string = '';
+  username: string = '';
+  showUserMenu: boolean = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private globalService: MyGlobalServiceService,
   ) {}
 
   ngOnInit() {
@@ -27,6 +32,8 @@ export class NavbarComponent implements OnInit {
         this.setActiveLink();
       });
     this.setActiveLink();
+    this.role = this.globalService.role;
+    this.username = this.globalService.username;
   }
 
   setActiveLink() {
@@ -36,5 +43,14 @@ export class NavbarComponent implements OnInit {
 
   onNavItemClicked(item: string) {
     this.navigationService.selectNavItem(item);
+  }
+
+  toggleUserMenu() {
+    this.showUserMenu = !this.showUserMenu;
+  }
+
+  logout() {
+    //this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
